@@ -77,8 +77,8 @@ addFriend(req,res) {
 },
 
     //remove a friend 
-    removeFriend(req, res) {
-        User.findOneAndDelete({ _id: req.params.userId },
+   deleteFriend(req, res) {
+        User.findOneAndUpdate({ _id: req.params.userId },
             {$pull: {friends: req.params.friendId}},
             {new: true})
       .then((user) =>
