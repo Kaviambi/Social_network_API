@@ -30,12 +30,15 @@ module.exports = {
         {new: true}
     );
 })
-    .then((thought) => res.json(thought))
-    .catch((err) => {
-        console.log(err);
-        return res.status(500).json(err);
-    });
+    .then((thought) => 
+    !thought
+    ? res.status(404).json({ message: 'No thoughts find with this ID'})
+    : res.json(thought)
+    )
+    .catch((err) => res.status(500).json(err));
    },
+    
+   
 
 // Update thought
 updateThought(req, res) {
@@ -66,7 +69,7 @@ Thought.findOneAndDelete({ _id: req.params.thoughtId })
 createReaction(req,res) {
     Thought.findOneAndUpdate(
         { _id: req.params.thoughtId },
-        {$set: { reactions: req.body } },
+        {$addToSet: { reactions: req.body } },
         { runValidators: true, new: true}
     )
     .then((thought) =>
