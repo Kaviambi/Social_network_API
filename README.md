@@ -33,3 +33,5 @@ Here is the walkthrough video demonstrating the application -
 
 
 The URL of the GitHub repository - 
+
+https://github.com/Kaviambi/Social_network_API.git
